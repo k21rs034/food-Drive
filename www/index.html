@@ -1,0 +1,411 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <script src="js/keys.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        
+
+        var ncmb = new NCMB(applicationKey, clientKey);
+
+        var test = []
+
+
+        var t = [];
+
+        var image = {
+            すし: "sushi.png",
+            にくじゃが: "nikujaga.png",
+            ゴーヤチャンプル: "goyachanp.png",
+            ちくぜんに: "tikuzenni.png",
+            おでん: "oden.png",
+            いちごだいふく: "itigodaihuku.png"
+        };
+
+        window.onload = function() {
+                init();
+            }
+            /*
+            document.addEventListener('DOMContentLoaded', function(){
+                init();
+            )
+            }
+            */
+
+        function init() {
+
+            var test_1 = {
+                name: "石橋",
+                すし: 1,
+                ゴーヤチャンプル: 1,
+                にくじゃが: 0,
+                いちごだいふく: 1,
+                ちくぜんに: 0,
+                おでん: 1
+            };
+
+            test.push(test_1);
+
+            console.log(test[0]);
+
+            var test_2 = {
+                name: "金政",
+                すし: 1,
+                ゴーヤチャンプル: 1,
+                にくじゃが: 1,
+                いちごだいふく: 1,
+                ちくぜんに: 0,
+                おでん: 1
+            };
+            var test_3 = {
+                name: "山口",
+                すし: 1,
+                ゴーヤチャンプル: 0,
+                にくじゃが: 1,
+                いちごだいふく: 2,
+                ちくぜんに: 0,
+                おでん: 1
+            };
+
+            test.push(test_2);
+            test.push(test_3);
+
+            test = [];
+
+            console.log("開始しました");
+            //二フクラから取ってきたデータをtestに入れていく
+            var testplay = ncmb.DataStore("Test");
+            console.log("開始しました:2");
+            testplay.fetchAll().then(function(objects) {
+                for (var i = 0; i < objects.length; i++) {
+                    console.log("開始しました:3" + ":" + i);
+                    object = objects[i];
+
+                    var dispName = object.get("gruopName");
+                    var dispMenu = object.get("menuName");
+
+                    console.log("グループ名：" + dispName);
+                    console.log("作成したメニュー：" + dispMenu);
+
+                    if (dispName.length > 0 && dispMenu.length > 0) {
+
+                        let search = 0;
+                        var index_2 = 0;
+                        for (let test_i = 0; test_i < test.length; test_i++) {
+                            if (test[test_i]["name"] == dispName) {
+                                search = 1;
+                                index_2 = test_i;
+                                break;
+                            }
+                        }
+                        if (search == 1) {
+                            test[index_2][dispMenu]++;
+                        } else {
+                            let task = {
+                                name: "",
+                                すし: 0,
+                                ゴーヤチャンプル: 0,
+                                にくじゃが: 0,
+                                いちごだいふく: 0,
+                                ちくぜんに: 0,
+                                おでん: 0
+                            };
+                            task["name"] = dispName;
+                            task[dispMenu]++;
+                            if(test.length < 5){
+                            test.push(task);
+                            }
+                        }
+                        for (let a = 0; a < test.length; a++) {
+                            console.log(test[a]["name"] + ":" + test[a][dispMenu] + dispMenu)
+                        }
+
+
+
+
+                        if (test.length == 0) {
+                            var task = {
+                                name: "",
+                                すし: 0,
+                                ゴーヤチャンプル: 0,
+                                にくじゃが: 0,
+                                いちごだいふく: 0,
+                                ちくぜんに: 0,
+                                おでん: 0
+                            };
+                            test[0] = task;
+                            task.name = dispName;
+                            console.log(task.name);
+                            for (menuKey in task) {}
+                        }
+                    }
+                }
+                drawResult();
+
+
+
+            });
+        }
+
+        function drawResult() {
+            console.log(test.length + "テスト配列の数")
+            var imagesList = [];
+            var index = 0;
+
+            var count = 0;
+            for (var ti = 0; ti < test.length; ti++) {
+                console.log(test[ti]["name"] + "ooooooooooooooooo")
+                var sum = 0;
+                console.log(test[ti]["name"] + "aaaaaaaaaaaaaaa");
+                for (var keyTmp in test[ti]) {
+                    if (test[ti][keyTmp] >= 1) {
+                        //console.log(test[ti]["すし"] + "個");
+                        sum += test[ti][keyTmp];
+                    }
+                }
+                console.log(test[ti]["name"] + "   合計：" + sum);
+                var imagesTmp = [];
+                index = 0;
+                for (testKey in test[ti]) {
+                    //if (test[ti][testKey] > 0)
+                    for ( var dab = 0; dab < test[ti][testKey];  dab++) {
+                        let iTmp = new Image();
+                        iTmp.src = image[testKey];
+                        imagesTmp.push(iTmp);
+                        console.log(test[ti]["name"] + ":" + testKey);
+                        //ここで描画を行えれば楽？
+
+                    }
+                }
+                imagesList.push(imagesTmp);
+
+                var tii = ti;
+                console.log(tii);
+
+
+                count++;
+            }
+            console.log(imagesList.length)
+
+            var content_area = document.getElementById("content_area");
+            for (var i = content_area.childNodes.length - 1; i >= 0; i--) {
+                content_area.removeChild(content_area.childNodes[i]);
+            }
+            for (var j = 0; j < imagesList.length; j++) {
+                var images = imagesList[j];
+                for (var i = 0; i < images.length; i++) {
+                    // img要素を作成
+                    var img_element = document.createElement('img');
+                    img_element.src = images[i].src; // 画像パス
+                    img_element.alt = 'ksuis'; // 代替テキスト
+                    img_element.style.position = "absolute";
+                    img_element.style.left = 200 * i + "px";
+                    img_element.style.top = 200 * j + "px";
+                    img_element.width = 200; // 横サイズ（px）
+                    img_element.height = 200; // 縦サイズ（px）
+                    // 指定した要素にimg要素を挿入
+
+
+
+                    content_area.appendChild(img_element);
+                }
+            }
+
+            for (var id = 0; id < test.length; id++) {
+                let htmlid = "result_" + (id + 1);
+                var sum_total = test[id]["すし"] + test[id]["ゴーヤチャンプル"] + test[id]["にくじゃが"] + test[id]["いちごだいふく"] + test[id]["ちくぜんに"] + test[id]["おでん"];
+                document.getElementById(htmlid).innerHTML = test[id]["name"]; //+ "チームは合計で" + "\r\n" + "<span class =\"text\"> " + sum_total + "</span>" + "品完成させました．";
+            }
+            //var text_node = document.createTextNode("表示テスト");
+
+            // BODY のノードリストに登録する
+            //content_area.appendChild(text_node);
+
+
+
+        }
+
+        function img() {
+            //画像の表示
+            const canvas = document.querySelector("#A1canvas");
+            var ctx = canvas.getContext("2d");
+            var img = new Image();
+            img.src = "sushi.png";
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, 150, 150);
+            };
+        }
+
+
+
+
+
+
+
+        var play = function timerplay() {
+            document.getElementById("result_1").innerText = " ";
+            /*
+            var testplay = ncmb.DataStore("Test");
+
+            testplay.fetchAll().then(function(objects) {
+                for (var i = 0; i < objects.length; i++) {
+                    object = objects[i];
+
+                    var dispName = object.get("gruopName");
+
+                    var dispMenu = object.get("menuName");
+
+                    console.log(dispName);
+                    console.log(dispMenu);
+                }
+            });
+            */
+
+
+
+
+
+
+            for (var i = 0; i < group.length; i++) {
+                // console.log(group[i]);
+            }
+            /*
+            for(key in group[0]){
+                console.log(key + "は" + group[0][key]);
+            }
+            */
+
+            /*for (var i = 0; i < group.length; i++) {
+                for (key in group[i]) {}
+                sum_group += group[i]["すし"] + group[i]["ゴーヤチャンプル"] + group[i]["にくじゃが"];
+
+                console.log(group[i]["name"] + "チームは合計で" + sum_group + "品完成させました．");
+
+                sum_group = 0;
+            }*/
+
+            /*
+            for (var i = 0; i < test.length; i++) {
+                for (key in test[i]) {
+                    //console.log(key + ":" + test[i][key]);
+                    //console.log(test[i]["name"]);
+                    //console.log(test[i]["すし"]);
+
+                }
+
+                //console.log(test[i]["すし"]);
+                sum += test[i]["すし"] + test[i]["ゴーヤチャンプル"] + test[i]["にくじゃが"];
+                document.getElementById("result_1").innerText += "すし：" + test[i]["すし"] + "品" + "\r\n" + "ゴーヤチャンプル：" + test[i]["ゴーヤチャンプル"] + "品" + "\r\n" + "にくじゃが：" + test[i]["にくじゃが"] + "品" + "\r\n" + test[i]["name"] + "チームは合計で" + sum + "品完成させました．" + "\r\n";
+                sum = 0;
+            }
+            */
+
+            for (var i = 0; i < test.length; i++) {
+
+                for (key in test[i]) {
+                    //console.log(key + test[i][key]);
+                }
+                //画像の追加
+
+            }
+
+            var testplay = ncmb.DataStore("Test");
+            testplay.fetchAll().then(function(objects) {
+                for (var i = 0; i < objects.length; i++) {
+                    console.log("開始しました:3" + ":" + i);
+                    object = objects[i];
+
+                    var dispName = object.get("gruopName");
+                    var dispMenu = object.get("menuName");
+
+                    console.log("グループ名：" + dispName);
+                    console.log("作成したメニュー：" + dispMenu);
+
+                    if (dispName.length > 0 && dispMenu.length > 0) {
+
+                        let search = 0;
+                        var index_2 = 0;
+                        for (let test_i = 0; test_i < test.length; test_i++) {
+                            if (test[test_i]["name"] == dispName) {
+                                search = 1;
+                                index_2 = test_i;
+                                break;
+                            }
+                        }
+                        if (search == 1) {
+                            test[index_2][dispMenu]++;
+                        } else {
+                            let task = {
+                                name: "",
+                                すし: 0,
+                                ゴーヤチャンプル: 0,
+                                にくじゃが: 0,
+                                いちごだいふく: 0,
+                                ちくぜんに: 0,
+                                おでん: 0
+                            };
+                            task["name"] = dispName;
+                            task[dispMenu]++;
+                            test.push(task);
+                        }
+                        for (let a = 0; a < test.length; a++) {
+                            console.log(test[a]["name"] + ":" + test[a][dispMenu] + dispMenu)
+                        }
+
+                    }
+                    drawResult();
+
+
+
+                }
+            });
+
+            //チームの合計のみを表示
+            /*
+            var sum_A = test[0]["すし"] + test[0]["ゴーヤチャンプル"] + test[0]["にくじゃが"];
+            document.getElementById("result_1").innerText = test[0]["name"] + "チームは合計で" + "\n\r" + sum_A + "品完成させました．";
+
+            var sum_B = test[1]["すし"] + test[1]["ゴーヤチャンプル"] + test[1]["にくじゃが"];
+            document.getElementById("result_2").innerText = test[1]["name"] + "チームは合計で" + "\n\r" + sum_B + "品完成させました．";
+
+            var sum_C = test[2]["すし"] + test[2]["ゴーヤチャンプル"] + test[2]["にくじゃが"];
+            document.getElementById("result_3").innerText = test[2]["name"] + "チームは合計で" + "\n\r" + sum_C + "品完成させました．";
+            */
+
+            img();
+
+
+        }
+
+        //タイマー処理
+        var time = 3000;
+        setInterval(init, time);
+    </script>
+</head>
+
+<body>
+    <span id="result"></span>
+    </br>
+    <span id="result_1"></span>
+    <span id="result_2"></span>
+    <span id="result_3"></span>
+    <span id="result_4"></span>
+    <span id="result_5"></span>
+    <!--
+    <canvas id="A1canvas" width="1100" height="780" style="border:4px solid">Test</canvas> -->
+    <article id="content_area" width = "1100" height ="500">
+        <img src="sushi.png" alt="ksuis" width="200" height="200">
+    </article>
+    <p>各チームのレシピ完成じょうきょう</p>
+    <a><img src="logo.png"width="150" height="150"></a>
+    <b><img src="logo.png"width="150" height="150"></b>
+
+</body>
+
+</html>
