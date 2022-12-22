@@ -153,6 +153,8 @@
             });
         }
 
+        
+
         function drawResult() {
             console.log(test.length + "テスト配列の数")
             var imagesList = [];
@@ -275,36 +277,7 @@
             for (var i = 0; i < group.length; i++) {
                 // console.log(group[i]);
             }
-            /*
-            for(key in group[0]){
-                console.log(key + "は" + group[0][key]);
-            }
-            */
 
-            /*for (var i = 0; i < group.length; i++) {
-                for (key in group[i]) {}
-                sum_group += group[i]["すし"] + group[i]["ゴーヤチャンプル"] + group[i]["にくじゃが"];
-
-                console.log(group[i]["name"] + "チームは合計で" + sum_group + "品完成させました．");
-
-                sum_group = 0;
-            }*/
-
-            /*
-            for (var i = 0; i < test.length; i++) {
-                for (key in test[i]) {
-                    //console.log(key + ":" + test[i][key]);
-                    //console.log(test[i]["name"]);
-                    //console.log(test[i]["すし"]);
-
-                }
-
-                //console.log(test[i]["すし"]);
-                sum += test[i]["すし"] + test[i]["ゴーヤチャンプル"] + test[i]["にくじゃが"];
-                document.getElementById("result_1").innerText += "すし：" + test[i]["すし"] + "品" + "\r\n" + "ゴーヤチャンプル：" + test[i]["ゴーヤチャンプル"] + "品" + "\r\n" + "にくじゃが：" + test[i]["にくじゃが"] + "品" + "\r\n" + test[i]["name"] + "チームは合計で" + sum + "品完成させました．" + "\r\n";
-                sum = 0;
-            }
-            */
 
             for (var i = 0; i < test.length; i++) {
 
@@ -317,6 +290,7 @@
 
             var testplay = ncmb.DataStore("Test");
             testplay.fetchAll().then(function(objects) {
+
                 for (var i = 0; i < objects.length; i++) {
                     console.log("開始しました:3" + ":" + i);
                     object = objects[i];
@@ -366,23 +340,22 @@
                 }
             });
 
-            //チームの合計のみを表示
-            /*
-            var sum_A = test[0]["すし"] + test[0]["ゴーヤチャンプル"] + test[0]["にくじゃが"];
-            document.getElementById("result_1").innerText = test[0]["name"] + "チームは合計で" + "\n\r" + sum_A + "品完成させました．";
-
-            var sum_B = test[1]["すし"] + test[1]["ゴーヤチャンプル"] + test[1]["にくじゃが"];
-            document.getElementById("result_2").innerText = test[1]["name"] + "チームは合計で" + "\n\r" + sum_B + "品完成させました．";
-
-            var sum_C = test[2]["すし"] + test[2]["ゴーヤチャンプル"] + test[2]["にくじゃが"];
-            document.getElementById("result_3").innerText = test[2]["name"] + "チームは合計で" + "\n\r" + sum_C + "品完成させました．";
-            */
-
             img();
-
 
         }
 
+        function pushButton() {
+            // テキストエリアの値を取得する
+            var message = document.getElementById("message").value;
+            // アラートで表示する
+            alert(message);
+            var MessageClass = ncmb.DataStore("Test");
+            var messageClass = new MessageClass();
+            // データを設定して保存する
+            messageClass.set("gruopName", message).save();   
+        }
+
+    
         //タイマー処理
         var time = 30000;
         setInterval(init, time);
