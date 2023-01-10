@@ -360,10 +360,30 @@
         //タイマー処理
         var time = 30000;
         setInterval(init, time);
+
+
+    function toDebug() {
+    // ランキング画面へ遷移
+    window.location.href = "#debug-page";
+    function pushButton() {
+            // テキストエリアの値を取得する
+            var message = document.getElementById("message").value;
+            // アラートで表示する
+            alert(message);
+            var MessageClass = ncmb.DataStore("Test");
+            var messageClass = new MessageClass();
+            // データを設定して保存する
+            messageClass.set("gruopName", message).save();
+            messageClass.set("menuName", "　").save();   
+      }
+    }
+
+
     </script>
 </head>
 
 <body>
+    <d><input type="button" value="データ送信モードへ移行" name="debug" onclick="toDebug()" /></d>
     <span id="result"></span>
     </br>
     <span id="result_1"></span>
@@ -372,8 +392,6 @@
     <span id="result_4"></span>
     <span id="result_5"></span>
 
-    <textarea id="message">テキストエリア</textarea>
-    <button onclick="pushButton();">送信</button>
     <!--
     <canvas id="A1canvas" width="1100" height="780" style="border:4px solid">Test</canvas> -->
     <article id="content_area" width = "1100" height ="500">
@@ -382,6 +400,22 @@
     <p>各チームのレシピ完成じょうきょう</p>
     <a><img src="logo.png"width="150" height="150"></a>
     <b><img src="logo.png"width="150" height="150"></b>
+ </div>
+
+
+ <div data-role="page" id="debug-page">
+    <div data-role="content">
+     
+     <div data-role="header" data-position="fixed" data-theme="c">
+            <h1></h1>
+            <a href="#list-page" data-icon="back" class="ui-btn-left">戻る</a>
+    </div>
+    
+    
+    <textarea id="message">テキストエリア</textarea>
+    <button onclick="pushButton();">送信</button>
+    </div>
+ </div>
 
 </body>
 
