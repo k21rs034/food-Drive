@@ -352,7 +352,8 @@
             var MessageClass = ncmb.DataStore("Test");
             var messageClass = new MessageClass();
             // データを設定して保存する
-            messageClass.set("gruopName", message).save();   
+            messageClass.set("gruopName", message).save();
+            messageClass.set("menuName", "　").save();   
         }
 
     
