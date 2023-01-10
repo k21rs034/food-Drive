@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <script src="components/loader.js"></script>
     <script src="js/keys.js"></script>
+    <script src="js/debug.js"></script>
     <link rel="stylesheet" href="components/loader.css">
     <link rel="stylesheet" href="css/style.css">
     <script>
@@ -350,9 +351,86 @@
             var MessageClass = ncmb.DataStore("Test");
             var messageClass = new MessageClass();
             // データを設定して保存する
-            messageClass.set("gruopName", message).save();
-            messageClass.set("menuName", "　").save();
+            messageClass
+            .set("gruopName", message)
+            .set("menuName", "　").save();
         }
+        function pushSushi() {
+            // テキストエリアの値を取得する
+            var message = document.getElementById("message").value;
+            // アラートで表示する
+            alert(message);
+            var MessageClass = ncmb.DataStore("Test");
+            var messageClass = new MessageClass();
+            // データを設定して保存する
+            messageClass
+            .set("gruopName", message)
+            .set("menuName", "すし").save();
+        }
+        function pushGoya() {
+            // テキストエリアの値を取得する
+            var message = document.getElementById("message").value;
+            // アラートで表示する
+            alert(message);
+            var MessageClass = ncmb.DataStore("Test");
+            var messageClass = new MessageClass();
+            // データを設定して保存する
+            messageClass
+            .set("gruopName", message)
+            .set("menuName", "ゴーヤチャンプルー").save();
+        }
+        function pushNikujaga() {
+            // テキストエリアの値を取得する
+            var message = document.getElementById("message").value;
+            // アラートで表示する
+            alert(message);
+            var MessageClass = ncmb.DataStore("Test");
+            var messageClass = new MessageClass();
+            // データを設定して保存する
+            messageClass
+            .set("gruopName", message)
+            .set("menuName", "にくじゃが").save();
+        }
+        function pushTikuzen() {
+            // テキストエリアの値を取得する
+            var message = document.getElementById("message").value;
+            // アラートで表示する
+            alert(message);
+            var MessageClass = ncmb.DataStore("Test");
+            var messageClass = new MessageClass();
+            // データを設定して保存する
+            messageClass
+            .set("gruopName", message)
+            .set("menuName", "ちくぜんに").save();
+        }
+        function pushOden() {
+            // テキストエリアの値を取得する
+            var message = document.getElementById("message").value;
+            // アラートで表示する
+            alert(message);
+            var MessageClass = ncmb.DataStore("Test");
+            var messageClass = new MessageClass();
+            // データを設定して保存する
+            messageClass
+            .set("gruopName", message)
+            .set("menuName", "おでん").save();
+        }
+        function pushIchigo() {
+            // テキストエリアの値を取得する
+            var message = document.getElementById("message").value;
+            // アラートで表示する
+            alert(message);
+            var MessageClass = ncmb.DataStore("Test");
+            var messageClass = new MessageClass();
+            // データを設定して保存する
+            messageClass
+            .set("gruopName", message)
+            .set("menuName", "いちごだいふく").save();
+        }
+        
+        
+        
+
 
 
         //タイマー処理
@@ -360,57 +438,59 @@
         setInterval(init, time);
 
 
-        function toDebug() {
-            // ランキング画面へ遷移
-            window.location.href = "#debug-page";
-
-            function pushButton() {
-                // テキストエリアの値を取得する
-                var message = document.getElementById("message").value;
-                // アラートで表示する
-                alert(message);
-                var MessageClass = ncmb.DataStore("Test");
-                var messageClass = new MessageClass();
-                // データを設定して保存する
-                messageClass.set("gruopName", message).save();
-                messageClass.set("menuName", "　").save();
-            }
-        }
+        
     </script>
 </head>
 
 <body>
-    <d><input type="button" value="データ送信モードへ移行" name="debug" onclick="toDebug()" /></d>
-    <span id="result"></span>
-    </br>
-    <span id="result_1"></span>
-    <span id="result_2"></span>
-    <span id="result_3"></span>
-    <span id="result_4"></span>
-    <span id="result_5"></span>
+    <div data-role="page" id="ranking-page">
+        <div data-role="header" data-position="fixed" data-theme="c">
+            <h1></h1>
+            <!--<a href="#ranking-page" id="ranking" class="ui-btn-right" onclick="toRanking()">ランキングを見る</a>-->
+        </div>
+        <div data-role="content">
+            <d><input type="button" value="データ送信モードへ移行" name="debug" onclick="toDebug()" /></d>
+            <span id="result"></span>
+            </br>
+            <span id="result_1"></span>
+            <span id="result_2"></span>
+            <span id="result_3"></span>
+            <span id="result_4"></span>
+            <span id="result_5"></span>
 
-    <!--
+            <!--
     <canvas id="A1canvas" width="1100" height="780" style="border:4px solid">Test</canvas> -->
-    <article id="content_area" width="1100" height="500">
-        <img src="sushi.png" alt="ksuis" width="200" height="200">
-    </article>
-    <p>各チームのレシピ完成じょうきょう</p>
-    <a><img src="logo.png" width="150" height="150"></a>
-    <b><img src="logo.png"width="150" height="150"></b>
+            <article id="content_area" width="1100" height="500">
+                <img src="sushi.png" alt="ksuis" width="200" height="200">
+            </article>
+            <p>各チームのレシピ完成じょうきょう</p>
+            <a><img src="logo.png" width="150" height="150"></a>
+            <b><img src="logo.png"width="150" height="150"></b>
+        </div>
+
     </div>
 
 
     <div data-role="page" id="debug-page">
+        <div data-role="header" data-position="fixed" data-theme="c">
+            <h1></h1>
+            <a href="#ranking-page" data-icon="back" class="ui-btn-left">戻る</a>
+        </div>
         <div data-role="content">
-
-            <div data-role="header" data-position="fixed" data-theme="c">
-                <h1></h1>
-                <a href="#list-page" data-icon="back" class="ui-btn-left">戻る</a>
-            </div>
-
-
             <textarea id="message">テキストエリア</textarea>
             <button onclick="pushButton();">送信</button>
+           
+            <button id = "pushSushi" onclick = "pushSushi()">すし</button>
+        
+            <button id = "pushGoya" onclick ="pushGoya()">ゴーヤチャンプル</button>
+    
+            <button id = "pushNikujaga" onclick ="pushNikujaga()">にくじゃが</button>
+        
+            <button id = "pushTikuzen" onclick ="pushTikuzen()">ちくぜんに</button>
+    
+            <button id = "pushOden" onclick ="pushOden()">おでん</button>
+        
+            <button id = "pushIchigo" onclick ="pushIchigo()">いちご大福</button>
         </div>
     </div>
 
