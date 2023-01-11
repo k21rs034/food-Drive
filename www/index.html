@@ -335,7 +335,6 @@
                     drawResult();
 
 
-
                 }
             });
 
@@ -343,6 +342,78 @@
 
         }
 
+        function toDebug(){
+            var p1 = document.getElementById("pushSushi");
+            var p2 = document.getElementById("pushGoya");
+            var p3 = document.getElementById("pushNikujaga");
+            var p4 = document.getElementById("pushTikuzen");
+            var p5 = document.getElementById("pushOden");
+            var p6 = document.getElementById("pushIchigo");
+            var p7 = document.getElementById("message");
+            var p8 = document.getElementById("pushTeam")
+
+
+            
+                if(p1.style.display=="block"){
+		        // noneで非表示
+		            p1.style.display ="none";
+	            }else{
+		        // blockで表示
+		           p1.style.display ="block";
+	            }
+                if(p2.style.display=="block"){
+		        // noneで非表示
+		            p2.style.display ="none";
+	            }else{
+		        // blockで表示
+		           p2.style.display ="block";
+	            }
+                if(p3.style.display=="block"){
+		        // noneで非表示
+		            p3.style.display ="none";
+	            }else{
+		        // blockで表示
+		           p3.style.display ="block";
+	            }
+                if(p4.style.display=="block"){
+		        // noneで非表示
+		            p4.style.display ="none";
+	            }else{
+		        // blockで表示
+		           p4.style.display ="block";
+	            }
+                if(p5.style.display=="block"){
+		        // noneで非表示
+		            p5.style.display ="none";
+	            }else{
+		        // blockで表示
+		           p5.style.display ="block";
+	            }
+                if(p6.style.display=="block"){
+		        // noneで非表示
+		            p6.style.display ="none";
+	            }else{
+		        // blockで表示
+		           p6.style.display ="block";
+	            }
+                if(p7.style.display=="block"){
+		        // noneで非表示
+		            p7.style.display ="none";
+	            }else{
+		        // blockで表示
+		           p7.style.display ="block";
+	            }
+                if(p8.style.display=="block"){
+		        // noneで非表示
+		            p8.style.display ="none";
+	            }else{
+		        // blockで表示
+		           p8.style.display ="block";
+	            }
+                
+        }
+
+    
         function pushButton() {
             // テキストエリアの値を取得する
             var message = document.getElementById("message").value;
@@ -443,13 +514,8 @@
 </head>
 
 <body>
-    <div data-role="page" id="ranking-page">
-        <div data-role="header" data-position="fixed" data-theme="c">
-            <h1></h1>
-            <!--<a href="#ranking-page" id="ranking" class="ui-btn-right" onclick="toRanking()">ランキングを見る</a>-->
-        </div>
-        <div data-role="content">
-            <d><input type="button" value="データ送信モードへ移行" name="debug" onclick="toDebug()" /></d>
+   
+            <d><input type="button" value="データ送信モードへ移行" onclick="toDebug()"></d>
             <span id="result"></span>
             </br>
             <span id="result_1"></span>
@@ -466,19 +532,10 @@
             <p>各チームのレシピ完成じょうきょう</p>
             <a><img src="logo.png" width="150" height="150"></a>
             <b><img src="logo.png"width="150" height="150"></b>
-        </div>
-
-    </div>
-
-
-    <div data-role="page" id="debug-page">
-        <div data-role="header" data-position="fixed" data-theme="c">
-            <h1></h1>
-            <a href="#ranking-page" data-icon="back" class="ui-btn-left">戻る</a>
-        </div>
-        <div data-role="content">
-            <textarea id="message">テキストエリア</textarea>
-            <button onclick="pushButton();">送信</button>
+        
+    
+            <textarea id="message">チーム名を入力してください</textarea>
+            <button id = "pushTeam" onclick="pushButton();">送信</button>
            
             <button id = "pushSushi" onclick = "pushSushi()">すし</button>
         
@@ -491,7 +548,7 @@
             <button id = "pushOden" onclick ="pushOden()">おでん</button>
         
             <button id = "pushIchigo" onclick ="pushIchigo()">いちご大福</button>
-        </div>
+    
     </div>
 
 </body>
