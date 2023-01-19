@@ -3,9 +3,8 @@ p{
     font-size:80px;
     position: absolute; top:0;
     margin-top: 10px;
-    left: 18%; right: 2%;
+    left: 14%; right: 2%;
     color:rgb(73, 128, 0);
-    
 
 }
 a{
@@ -87,6 +86,7 @@ span.text{
 }
 
 textarea{
+    color:red;
     font-size: 20px;
     position:absolute; top:1200px; left:0%; width:43%; height:60px; 
     display:none;
@@ -97,8 +97,9 @@ textarea{
     position:absolute; top:1200px; left:50%; width:43%; height:60px;
     display: none;
 }
+
 d{
-    font-size: 20px;
+    font-size: 40px;
     position:absolute; top:1100px; left:50%; width:43%; height:60px;
 }
 
